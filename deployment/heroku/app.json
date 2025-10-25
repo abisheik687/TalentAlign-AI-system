@@ -1,52 +1,58 @@
 {
-  "name": "TalentAlign AI",
-  "description": "Ethical AI-powered hiring platform for fair and transparent recruitment",
-  "repository": "https://github.com/your-org/talentalign-ai",
-  "logo": "https://talentalign-ai.com/logo.png",
-  "keywords": ["ai", "hiring", "ethics", "bias-detection", "recruitment"],
-  "stack": "heroku-22",
-  "buildpacks": [
-    {
-      "url": "heroku/nodejs"
+    "name": "TalentAlign AI",
+    "description": "Ethical AI-powered hiring platform for fair and transparent recruitment",
+    "repository": "https://github.com/your-org/talentalign-ai",
+    "logo": "https://talentalign-ai.com/logo.png",
+    "keywords": [
+        "ai",
+        "hiring",
+        "ethics",
+        "bias-detection",
+        "recruitment"
+    ],
+    "stack": "heroku-22",
+    "buildpacks": [
+        {
+            "url": "heroku/nodejs"
+        }
+    ],
+    "formation": {
+        "web": {
+            "quantity": 1,
+            "size": "eco"
+        }
+    },
+    "addons": [
+        {
+            "plan": "heroku-postgresql:mini"
+        },
+        {
+            "plan": "heroku-redis:mini"
+        }
+    ],
+    "env": {
+        "NODE_ENV": {
+            "description": "Node.js environment",
+            "value": "production"
+        },
+        "JWT_SECRET": {
+            "description": "JWT secret key for authentication",
+            "generator": "secret"
+        },
+        "JWT_REFRESH_SECRET": {
+            "description": "JWT refresh token secret",
+            "generator": "secret"
+        },
+        "OPENAI_API_KEY": {
+            "description": "OpenAI API key for AI features",
+            "required": false
+        },
+        "CORS_ORIGIN": {
+            "description": "Frontend URL for CORS",
+            "value": "https://talentalign-frontend.herokuapp.com"
+        }
+    },
+    "scripts": {
+        "postdeploy": "cd backend && npm run db:seed"
     }
-  ],
-  "formation": {
-    "web": {
-      "quantity": 1,
-      "size": "eco"
-    }
-  },
-  "addons": [
-    {
-      "plan": "heroku-postgresql:mini"
-    },
-    {
-      "plan": "heroku-redis:mini"
-    }
-  ],
-  "env": {
-    "NODE_ENV": {
-      "description": "Node.js environment",
-      "value": "production"
-    },
-    "JWT_SECRET": {
-      "description": "JWT secret key for authentication",
-      "generator": "secret"
-    },
-    "JWT_REFRESH_SECRET": {
-      "description": "JWT refresh token secret",
-      "generator": "secret"
-    },
-    "OPENAI_API_KEY": {
-      "description": "OpenAI API key for AI features",
-      "required": false
-    },
-    "CORS_ORIGIN": {
-      "description": "Frontend URL for CORS",
-      "value": "https://talentalign-frontend.herokuapp.com"
-    }
-  },
-  "scripts": {
-    "postdeploy": "cd backend && npm run db:seed"
-  }
 }

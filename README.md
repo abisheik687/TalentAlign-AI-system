@@ -161,13 +161,58 @@ Production-Ready Setup
 
 ## 🚀 **Quick Start**
 
-### **Prerequisites**
-- Node.js 18.x or higher
-- MongoDB 7.x or higher
-- Redis (optional, for caching)
-- OpenAI API Key (for AI features)
+### **🌐 Free Cloud Deployment (Recommended)**
 
-### **Installation**
+Deploy TalentAlign AI to the cloud in minutes with our one-click deployment options:
+
+#### **Option 1: Vercel (Full-Stack) + MongoDB Atlas**
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/your-org/talentalign-ai&env=MONGODB_URI,JWT_SECRET,JWT_REFRESH_SECRET&envDescription=Required%20environment%20variables&envLink=https://github.com/your-org/talentalign-ai/blob/main/deployment/DEPLOYMENT_GUIDE.md)
+
+**Free Tier Includes:**
+- ✅ 100GB bandwidth/month
+- ✅ Unlimited sites
+- ✅ Global CDN
+- ✅ Automatic HTTPS
+
+#### **Option 2: Railway (Backend) + Netlify (Frontend)**
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https://github.com/your-org/talentalign-ai)
+
+**Free Tier Includes:**
+- ✅ $5 credit/month (~550 hours)
+- ✅ Database included
+- ✅ Full backend support
+
+#### **Option 3: Render (All-in-One)**
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/your-org/talentalign-ai)
+
+**Free Tier Includes:**
+- ✅ 750 hours/month
+- ✅ Database included
+- ✅ SSL certificates
+
+### **⚡ Automated Deployment**
+
+Use our deployment script for guided setup:
+
+```bash
+# Clone repository
+git clone https://github.com/your-org/talentalign-ai.git
+cd talentalign-ai
+
+# Run quick deploy script
+chmod +x scripts/quick-deploy.sh
+./scripts/quick-deploy.sh
+```
+
+### **💻 Local Development**
+
+#### **Prerequisites**
+- Node.js 18.x or higher
+- MongoDB (local) or MongoDB Atlas (cloud)
+- Redis (optional, for caching)
+- OpenAI API Key (optional, for AI features)
+
+#### **Installation**
 
 1. **Clone the Repository**
 ```bash
@@ -175,17 +220,23 @@ git clone https://github.com/your-org/talentalign-ai.git
 cd talentalign-ai
 ```
 
-2. **Backend Setup**
+2. **Quick Setup**
 ```bash
+# Automated local setup
+./scripts/quick-deploy.sh
+# Choose option 5 for local development
+```
+
+3. **Manual Setup**
+```bash
+# Backend Setup
 cd backend
 npm install
 cp .env.example .env
 # Edit .env with your configuration
 npm run dev
-```
 
-3. **Frontend Setup**
-```bash
+# Frontend Setup (new terminal)
 cd frontend
 npm install
 cp .env.example .env

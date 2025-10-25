@@ -1,26 +1,56 @@
 {
   "name": "talentalign-ai",
   "version": "1.0.0",
-  "description": "Ethical AI recruiting system focused on transparency and bias mitigation",
-  "main": "index.js",
+  "description": "Ethical AI-powered hiring platform for fair and transparent recruitment",
+  "private": true,
   "scripts": {
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
     "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
+    "start": "cd backend && npm start",
+    "build": "npm run build:backend && npm run build:frontend",
+    "build:vercel": "npm run install:all && npm run build",
+    "build:backend": "cd backend && npm install && npm run build",
+    "build:frontend": "cd frontend && npm install && npm run build",
     "server:dev": "cd backend && npm run dev",
-    "client:dev": "cd frontend && npm run dev",
-    "build": "npm run client:build && npm run server:build",
-    "client:build": "cd frontend && npm run build",
-    "server:build": "cd backend && npm run build",
-    "test": "npm run client:test && npm run server:test",
-    "client:test": "cd frontend && npm test",
-    "server:test": "cd backend && npm test",
-    "lint": "npm run client:lint && npm run server:lint",
-    "client:lint": "cd frontend && npm run lint",
-    "server:lint": "cd backend && npm run lint"
+    "client:dev": "cd frontend && npm start",
+    "test": "npm run test:backend && npm run test:frontend",
+    "test:backend": "cd backend && npm test",
+    "test:frontend": "cd frontend && npm test -- --watchAll=false",
+    "lint": "npm run lint:backend && npm run lint:frontend",
+    "lint:backend": "cd backend && npm run lint",
+    "lint:frontend": "cd frontend && npm run lint",
+    "deploy:vercel": "./scripts/deploy-vercel.sh",
+    "setup:db": "./scripts/setup-database.sh",
+    "quick:deploy": "./scripts/quick-deploy.sh"
   },
-  "keywords": ["ai", "recruiting", "ethics", "bias-detection", "transparency"],
+  "keywords": [
+    "ai",
+    "hiring",
+    "ethics",
+    "bias-detection",
+    "recruitment",
+    "fairness",
+    "transparency"
+  ],
   "author": "TalentAlign AI Team",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/talentalign-ai.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-org/talentalign-ai/issues"
+  },
+  "homepage": "https://talentalign-ai.com",
   "devDependencies": {
     "concurrently": "^8.2.2"
-  }
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "workspaces": [
+    "backend",
+    "frontend"
+  ]
 }
