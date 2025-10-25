@@ -1,7 +1,8 @@
-import { AnonymizationService } from '@/services/AnonymizationService';
-import { ConsentService } from '@/services/ConsentService';
-import { logger } from '@/utils/logger';
-import { CacheService } from '@/config/redis';
+import { AnonymizationService } from './AnonymizationService';
+import { ConsentService } from './ConsentService';
+import { logger } from '../utils/logger';
+import { cacheService } from '../config/redis';
+import { BiasAnalysisResult, BiasFlag } from '../types/bias';
 import OpenAI from 'openai';
 import pdfParse from 'pdf-parse';
 import crypto from 'crypto';
@@ -132,23 +133,9 @@ export interface EducationAnalysis {
   certificationScore: number; // 0-100
 }
 
-export interface BiasAnalysisResult {
-  overallBiasScore: number; // 0-1, lower is better
-  biasFlags: BiasFlag[];
-  demographicIndicators: DemographicIndicator[];
-  languageBias: LanguageBias;
-  institutionBias: InstitutionBias;
-  locationBias: LocationBias;
-  recommendations: string[];
-}
+// BiasAnalysisResult is imported from types/bias.ts
 
-export interface BiasFlag {
-  type: string;
-  severity: 'low' | 'medium' | 'high';
-  description: string;
-  location: string;
-  suggestion: string;
-}
+// BiasFlag is imported from types/bias.ts
 
 export interface DemographicIndicator {
   type: string;

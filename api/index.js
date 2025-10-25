@@ -3,7 +3,6 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 
-// Import your existing app
 const app = express();
 
 // Security middleware
