@@ -1,0 +1,26 @@
+{
+  "name": "talentalign-ai",
+  "version": "1.0.0",
+  "description": "Ethical AI recruiting system focused on transparency and bias mitigation",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
+    "server:dev": "cd backend && npm run dev",
+    "client:dev": "cd frontend && npm run dev",
+    "build": "npm run client:build && npm run server:build",
+    "client:build": "cd frontend && npm run build",
+    "server:build": "cd backend && npm run build",
+    "test": "npm run client:test && npm run server:test",
+    "client:test": "cd frontend && npm test",
+    "server:test": "cd backend && npm test",
+    "lint": "npm run client:lint && npm run server:lint",
+    "client:lint": "cd frontend && npm run lint",
+    "server:lint": "cd backend && npm run lint"
+  },
+  "keywords": ["ai", "recruiting", "ethics", "bias-detection", "transparency"],
+  "author": "TalentAlign AI Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

@@ -1,0 +1,49 @@
+services:
+  # Backend API Service
+  - type: web
+    name: talentalign-backend
+    env: node
+    plan: free
+    buildCommand: cd backend && npm install && npm run build
+    startCommand: cd backend && npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+      - key: MONGODB_URI
+        fromDatabase:
+          name: talentalign-mongodb
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: CORS_ORIGIN
+        value: https://talentalign-frontend.onrender.com
+
+  # Frontend Static Site
+  - type: web
+    name: talentalign-frontend
+    env: static
+    plan: free
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: frontend/build
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://talentalign-backend.onrender.com/api
+      - key: REACT_APP_NAME
+        value: TalentAlign AI
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
+databases:
+  - name: talentalign-mongodb
+    databaseName: talentalign-ai
+    user: admin
+    plan: free
