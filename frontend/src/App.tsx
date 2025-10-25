@@ -1,81 +1,38 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
-import { Box } from '@mui/material';
+import React from 'react';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import { Box, Typography, Container } from '@mui/material';
 
-import { useAuth } from '@/hooks/useAuth';
-import Layout from '@/components/Layout/Layout';
-import LoadingSpinner from '@/components/Common/LoadingSpinner';
+const theme = createTheme({
+  palette: {
+    mode: 'light',
+    primary: {
+      main: '#1976d2',
+    },
+    secondary: {
+      main: '#dc004e',
+    },
+  },
+});
 
-// Pages
-import LoginPage from '@/pages/Auth/LoginPage';
-import DashboardPage from '@/pages/Dashboard/DashboardPage';
-import CandidatesPage from '@/pages/Candidates/CandidatesPage';
-import JobsPage from '@/pages/Jobs/JobsPage';
-import MatchingPage from '@/pages/Matching/MatchingPage';
-import EthicsDashboardPage from '@/pages/Ethics/EthicsDashboardPage';
-import ProfilePage from '@/pages/Profile/ProfilePage';
-import NotFoundPage from '@/pages/NotFound/NotFoundPage';
-
-function App(): JSX.Element {
-  const { user, loading } = useAuth();
-
-  if (loading) {
-    return (
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        minHeight="100vh"
-      >
-        <LoadingSpinner />
-      </Box>
-    );
-  }
-
+function App() {
   return (
-    <>
-      <Helmet>
-        <title>TalentAlign AI - Ethical Recruiting Platform</title>
-        <meta
-          name="description"
-          content="Ethical AI recruiting system focused on transparency and bias mitigation"
-        />
-      </Helmet>
-
-      <Routes>
-        {/* Public routes */}
-        <Route
-          path="/login"
-          element={!user ? <LoginPage /> : <Navigate to="/dashboard" replace />}
-        />
-
-        {/* Protected routes */}
-        <Route
-          path="/"
-          element={
-            user ? (
-              <Layout>
-                <Routes>
-                  <Route index element={<Navigate to="/dashboard" replace />} />
-                  <Route path="dashboard" element={<DashboardPage />} />
-                  <Route path="candidates/*" element={<CandidatesPage />} />
-                  <Route path="jobs/*" element={<JobsPage />} />
-                  <Route path="matching/*" element={<MatchingPage />} />
-                  <Route path="ethics/*" element={<EthicsDashboardPage />} />
-                  <Route path="profile" element={<ProfilePage />} />
-                  <Route path="*" element={<NotFoundPage />} />
-                </Routes>
-              </Layout>
-            ) : (
-              <Navigate to="/login" replace />
-            )
-          }
-        />
-
-        {/* Catch all route */}
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Container maxWidth="lg">
+        <Box sx={{ my: 4 }}>
+          <Typography variant="h3" component="h1" gutterBottom>
+            TalentAlign AI
+          </Typography>
+          <Typography variant="h5" component="h2" gutterBottom>
+            Ethical AI-Powered Hiring Platform
+          </Typography>
+          <Typography variant="body1">
+            Welcome to TalentAlign AI - Making hiring fair, transparent, and ethical for everyone.
+          </Typography>
+        </Box>
+      </Container>
+    </ThemeProvider>
   );
 }
 

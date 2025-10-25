@@ -8,16 +8,16 @@
     "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
     "start": "node api/index.js",
     "build": "npm run build:frontend",
-    "build:vercel": "npm run install:all && npm run build:frontend",
-    "build:backend": "echo 'Backend build skipped for Vercel serverless'",
+    "build:vercel": "cd frontend && npm install && npm run build",
+    "build:backend": "cd backend && npm install && npm run build",
     "build:frontend": "cd frontend && npm install && npm run build",
     "server:dev": "cd backend && npm run dev",
     "client:dev": "cd frontend && npm start",
-    "test": "npm run test:frontend",
-    "test:backend": "echo 'Backend tests skipped for Vercel'",
-    "test:frontend": "cd frontend && npm test -- --watchAll=false",
-    "lint": "npm run lint:frontend",
-    "lint:backend": "echo 'Backend lint skipped for Vercel'",
+    "test": "npm run test:frontend && npm run test:backend",
+    "test:backend": "cd backend && npm test",
+    "test:frontend": "cd frontend && npm test",
+    "lint": "npm run lint:frontend && npm run lint:backend",
+    "lint:backend": "cd backend && npm run lint",
     "lint:frontend": "cd frontend && npm run lint",
     "deploy:vercel": "./scripts/deploy-vercel.sh",
     "setup:db": "./scripts/setup-database.sh",
@@ -42,6 +42,11 @@
     "url": "https://github.com/your-org/talentalign-ai/issues"
   },
   "homepage": "https://talentalign-ai.com",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0"
+  },
   "devDependencies": {
     "concurrently": "^8.2.2"
   },
